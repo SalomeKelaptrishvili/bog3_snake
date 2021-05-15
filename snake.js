@@ -112,7 +112,7 @@ class Apple extends Catalog {
                 // snakeSquare.y = 
                 this.snakeBody.push(snakeSquare);
                 snakeSquare.classList.add('snakeSquare');
-                //snakeBoard.appendChild(snakeSquare);
+                // snakeBoard.appendChild(snakeSquare);
             }
             this.addSquares = 0;
 
@@ -124,8 +124,6 @@ class Apple extends Catalog {
         }
         console.log("eatApple");
     }
-
-    // let appleInitialPosition = {x:15, y:2};
 
     //draws apple square
     createApple(){
@@ -171,12 +169,15 @@ class Game extends Apple{
         for(let i = 1; i < this.snakeBody.length; i++){
             if(this.snakeBody[0].x == this.snakeBody[i].x && this.snakeBody[0].y == this.snakeBody[i].y) {
                 document.getElementById("gameover").innerHTML = "GAME OVER";
-
-                // while(document.getElementById("frame").childElementCount()!= 0){
-                //     document.getElementById("frame").removeChild();
-                // }
-                //////////////////es ar shlis, mainc grdzeldeba tamashii
-                
+                // sleep(5000);
+                // document.removeEventListener('keydown',(e)=> this.eventFunction(e));
+                // let t0 = window.performance.now();
+                //this.initDirection = {x:0, y:0}
+                // let t1 = window.performance.now();
+                // let milliseconds = t1-t0;
+                // clearInterval(milliseconds);
+                setTimeout(location.reload.bind(location),1000);
+                //window.location.reload();
                 // this.game();
                 // return;
             }
