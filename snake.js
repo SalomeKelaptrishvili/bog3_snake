@@ -6,7 +6,7 @@ class Config{
         this.up = 38;
         this.right = 39;
         this.down = 40;
-
+        this.score = 0; 
         // this.snakeBody = [{x: 1, y:15},
         //     {x: 2, y:15},
         //     {x: 3, y:15},
@@ -64,7 +64,7 @@ class Catalog extends Config{
     moveSnakeSquare(){
         // this.checkBorders();
         this.prevDirection = this.initDirection;
-        let arr = this.snakeBody; //creates a copy of snakeBody array
+        //creates a copy of snakeBody array
         
         // for(let i = 0; i < this.addSquares; i++){
         //     // this.snakeBody.push(arr[arr.length - 1]);
@@ -73,6 +73,7 @@ class Catalog extends Config{
 
         //updates coordinates of every square(except first one)
         //only after that(otherwise, arr would have been changed already) it updates coordinates of the first element(head) of snakebody
+        let arr = this.snakeBody; 
         for(let i = this.snakeBody.length - 1; i > 0; i--){
             this.snakeBody[i].x = arr[i - 1].x;
             this.snakeBody[i].y = arr[i - 1].y;
@@ -100,17 +101,26 @@ class Apple extends Catalog {
     
     eatApple(){
         if(this.appleCheck(this.apple)){
-            this.addSquares += 2; 
+            this.addSquares += 1; 
 
             //es unda gavasworo ar mushaobs, ar izrdeba zomashi snakeeeeeeeeeeee :((((((((((( 
             for(let i = 0; i < this.addSquares; i++){
-                //ese ar mushaobs
-                // let arr = this.snakeBody; 
-                // this.snakeBody.push(arr[arr.length - 1]);
+                let snakeSquare = document.createElement('div');
+                // snakeSquare.classList.add('snakeSquare');
+                // snakeBoard.appendChild(snakeSquare);
+                // snakeSquare.x = 
+                // snakeSquare.y = 
+                this.snakeBody.push(snakeSquare);
+                snakeSquare.classList.add('snakeSquare');
+                //snakeBoard.appendChild(snakeSquare);
             }
             this.addSquares = 0;
 
             this.apple = this.randomApple(); //{x: 4, y:4};
+
+            this.score++;
+            document.getElementById("score").innerHTML = "";
+            document.getElementById("score").innerHTML = `SCORE: ${this.score}`;
         }
         console.log("eatApple");
     }
@@ -161,14 +171,19 @@ class Game extends Apple{
         for(let i = 1; i < this.snakeBody.length; i++){
             if(this.snakeBody[0].x == this.snakeBody[i].x && this.snakeBody[0].y == this.snakeBody[i].y) {
                 document.getElementById("gameover").innerHTML = "GAME OVER";
+
                 // while(document.getElementById("frame").childElementCount()!= 0){
                 //     document.getElementById("frame").removeChild();
-                // } //////////////////es ar shlis, mainc grdzeldeba tamashii
-                return;
+                // }
+                //////////////////es ar shlis, mainc grdzeldeba tamashii
+                
+                // this.game();
+                // return;
             }
         }
     }
     game(){
+
         document.addEventListener('keydown',(e)=> this.eventFunction(e));
 
         this.moveSnakeSquare();
@@ -180,6 +195,7 @@ class Game extends Apple{
         this.createApple();
 
         this.gameOver();
+        
     }
 }
 
@@ -187,5 +203,5 @@ let snakeGame = new Game();
 
 setInterval(()=>{
     snakeGame.game()
-},200);
+},100);
 // snakeGame.game();
