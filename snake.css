@@ -27,13 +27,15 @@ h1{
 }
 .snakeSquare{
     background-color: green;
-    border: 0.5px solid black;
+    border: 0.5px solid white;
 }
 .apple{
     background-color: red;
     border: 0.5px solid black;
 }
-
+#gameover{
+    color:white;
+}
 
 
 
