@@ -7,11 +7,7 @@ class Config{
         this.right = 39;
         this.down = 40;
         this.score = 0; 
-        // this.snakeBody = [{x: 1, y:15},
-        //     {x: 2, y:15},
-        //     {x: 3, y:15},
-        //     {x: 4, y:15}
-        //    ]; //aq pirikit unda mkondes, ese marjvena kvadrats gvian achens 
+        
         this.initY = Math.floor(Math.random() * 20) + 1;
 
         this.snakeBody = [{x: 3, y: this.initY},
@@ -62,18 +58,12 @@ class Catalog extends Config{
 
     //updates and moves snake 
     moveSnakeSquare(){
-        // this.checkBorders();
         this.prevDirection = this.initDirection;
-        //creates a copy of snakeBody array
-        
-        // for(let i = 0; i < this.addSquares; i++){
-        //     // this.snakeBody.push(arr[arr.length - 1]);
-        // }
-        // this.addSquares = 0;
 
         //updates coordinates of every square(except first one)
         //only after that(otherwise, arr would have been changed already) it updates coordinates of the first element(head) of snakebody
-        let arr = this.snakeBody; 
+        let arr = this.snakeBody; //creates a copy of snakeBody array
+
         for(let i = this.snakeBody.length - 1; i > 0; i--){
             this.snakeBody[i].x = arr[i - 1].x;
             this.snakeBody[i].y = arr[i - 1].y;
@@ -106,10 +96,7 @@ class Apple extends Catalog {
             //es unda gavasworo ar mushaobs, ar izrdeba zomashi snakeeeeeeeeeeee :((((((((((( 
             for(let i = 0; i < this.addSquares; i++){
                 let snakeSquare = document.createElement('div');
-                // snakeSquare.classList.add('snakeSquare');
-                // snakeBoard.appendChild(snakeSquare);
-                // snakeSquare.x = 
-                // snakeSquare.y = 
+
                 this.snakeBody.push(snakeSquare);
                 snakeSquare.classList.add('snakeSquare');
                 // snakeBoard.appendChild(snakeSquare);
@@ -150,7 +137,7 @@ class Apple extends Catalog {
         return randomApple;
     }
 
-    //checks if apple coordinates matches snake coordinates
+    //checks if apple coordinates match snake coordinates
     appleCheck(item){
         let res = false;
         this.snakeBody.forEach(function(square){
@@ -169,17 +156,13 @@ class Game extends Apple{
         for(let i = 1; i < this.snakeBody.length; i++){
             if(this.snakeBody[0].x == this.snakeBody[i].x && this.snakeBody[0].y == this.snakeBody[i].y) {
                 document.getElementById("gameover").innerHTML = "GAME OVER";
-                // sleep(5000);
-                // document.removeEventListener('keydown',(e)=> this.eventFunction(e));
-                // let t0 = window.performance.now();
-                //this.initDirection = {x:0, y:0}
-                // let t1 = window.performance.now();
-                // let milliseconds = t1-t0;
-                // clearInterval(milliseconds);
-                setTimeout(location.reload.bind(location),1000);
-                //window.location.reload();
-                // this.game();
-                // return;
+
+                while(this.snakeBody.length != 0){
+                    this.snakeBody.pop();
+                }
+
+                setTimeout(location.reload.bind(location),2000);
+                
             }
         }
     }
@@ -189,9 +172,9 @@ class Game extends Apple{
 
         this.moveSnakeSquare();
         snakeBoard.innerHTML = "";
-        this.createSnakeSquare();
         this.checkBorders();
-
+        this.createSnakeSquare();
+        
         this.eatApple();
         this.createApple();
 
